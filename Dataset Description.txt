@@ -1,0 +1,20 @@
+Non-small cell lung cancer (NSCLC) dissociated tumor cells from 7 donors were obtained from Discovery Life Sciences. Cells were labeled with TotalSeq™-B Human TBNK Cocktail (BioLegend). Each donor was CellPlexed and pooled at equal proportions. Viable cells in the pool were identified by 7AAD staining and sorted via FACS.
+
+Gene Expression and CellPlex libraries were generated from ~33,000 cells as described in the Chromium Single Cell 3' Reagent Kits User Guide (v3.1 Chemistry Dual Index) with Feature Barcode technology for Cell Surface Protein and Cell Multiplexing (CG000390 Rev B) using the Chromium X and sequenced on an Illumina NovaSeq 6000 to a read depth of approximately 70,000 mean reads per cell for Gene Expression and 25,000 mean reads per cell for CellPlex.
+
+Paired-end, dual indexing:
+
+Read 1: 28 cycles (16 bp barcode, 12 bp UMI)
+i5 index: 10 cycles (sample index)
+i7 index: 10 cycles (sample index)
+Read 2: 90 cycles (transcript)
+Analysis parameters used: expect-cells=20000 and include-introns=true
+
+Pooled multiplexed sample - Key metrics:
+
+Estimated number of cells: 20,471
+Cells assigned to a sample: 15,618
+
+
+Download from:
+https://www.10xgenomics.com/resources/datasets/40-k-mixture-of-nsclc-dt-cs-from-7-donors-3-ht-v-3-1-3-1-high-6-1-0
