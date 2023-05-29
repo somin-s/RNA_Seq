@@ -26,9 +26,9 @@ nsclc.seurat.obj #
 
 
 # 1. QC -------
-View(nsclc.seurat.obj@meta.data) #this number show to how quality of gene and molecule are, based on the the number of detection.
+View(nsclc.seurat.obj@meta.data) 
 # % MT reads
-nsclc.seurat.obj[["percent.mt"]] <- PercentageFeatureSet(nsclc.seurat.obj, pattern = "^MT-")# in low quality cell we can see the high mitochondria (MT) contemination
+nsclc.seurat.obj[["percent.mt"]] <- PercentageFeatureSet(nsclc.seurat.obj, pattern = "^MT-")
 View(nsclc.seurat.obj@meta.data)
 
 VlnPlot(nsclc.seurat.obj, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
@@ -37,20 +37,20 @@ FeatureScatter(nsclc.seurat.obj, feature1 = "nCount_RNA", feature2 = "nFeature_R
 
 # 2. Filtering -----------------
 nsclc.seurat.obj <- subset(nsclc.seurat.obj, subset = nFeature_RNA > 200 & nFeature_RNA < 2500 & 
-                             percent.mt < 5) # filter out based on this condition
+                             percent.mt < 5)
 
 # 3. Normalize data ----------
 #nsclc.seurat.obj <- NormalizeData(nsclc.seurat.obj, normalization.method = "LogNormalize", scale.factor = 10000)
 # OR
-nsclc.seurat.obj <- NormalizeData(nsclc.seurat.obj) # normalize the data for measurement of the different cells, this function is default
+nsclc.seurat.obj <- NormalizeData(nsclc.seurat.obj) 
 str(nsclc.seurat.obj)
 
 
 # 4. Identify highly variable features --------------
-nsclc.seurat.obj <- FindVariableFeatures(nsclc.seurat.obj, selection.method = "vst", nfeatures = 2000) #nfeatures is the number of features
+nsclc.seurat.obj <- FindVariableFeatures(nsclc.seurat.obj, selection.method = "vst", nfeatures = 2000)
 
 # Identify the 10 most highly variable genes
-top10 <- head(VariableFeatures(nsclc.seurat.obj), 10) # select only top 10 highly variable genes
+top10 <- head(VariableFeatures(nsclc.seurat.obj), 10)
 
 # plot variable features with and without labels
 plot1 <- VariableFeaturePlot(nsclc.seurat.obj)
@@ -59,7 +59,7 @@ LabelPoints(plot = plot1, points = top10, repel = TRUE)
 
 # 5. Scaling ------------- # cannot run this function in this PC
 all.genes <- rownames(nsclc.seurat.obj)
-nsclc.seurat.obj <- ScaleData(nsclc.seurat.obj, features = all.genes) # technical noise, this variable will not be cluster, just biological similarity will be cluster.
+nsclc.seurat.obj <- ScaleData(nsclc.seurat.obj, features = all.genes)
 str(nsclc.seurat.obj)
 
 # 6. Perform Linear dimensionality reduction --------------
@@ -88,10 +88,6 @@ Idents(nsclc.seurat.obj)
 Idents(nsclc.seurat.obj) <- "RNA_snn_res.0.1"
 Idents(nsclc.seurat.obj)
 
-# non-linear dimensionality reduction --------------
-# If you haven't installed UMAP, you can do so via reticulate::py_install(packages =
-# 'umap-learn')
+#8 non-linear dimensionality reduction --------------
 nsclc.seurat.obj <- RunUMAP(nsclc.seurat.obj, dims = 1:15)
-# note that you can set `label = TRUE` or use the LabelClusters function to help label
-# individual clusters
 DimPlot(nsclc.seurat.obj, reduction = "umap")
