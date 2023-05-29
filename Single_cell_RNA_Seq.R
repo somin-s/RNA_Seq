@@ -9,7 +9,7 @@ library(Seurat)
 library(tidyverse)
 
 # Load the NSCLC dataset
-nsclc.sparse.m <- Read10X_h5(filename = 'D:/Projects/RNA-Seq/LungCancer/data/20k_NSCLC_DTC_3p_nextgem_intron_Multiplex_count_raw_feature_bc_matrix.h5')
+nsclc.sparse.m <- Read10X_h5(filename = '.../data/20k_NSCLC_DTC_3p_nextgem_intron_Multiplex_count_raw_feature_bc_matrix.h5')
 str(nsclc.sparse.m) #to show how many moralities in genome matrix
 cts <-  nsclc.sparse.m$`Gene Expression`
 #cts[1:10, 1:10] #to see sparse metric
